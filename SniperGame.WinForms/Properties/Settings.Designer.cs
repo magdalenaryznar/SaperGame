@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SudokuGame.WPF.Properties
+namespace SniperGame.WinForms.Properties
 {
 
 
