@@ -1,3 +1,3 @@
-# SudokuGame
-Gra Sniper napisana w C#
+# Saper Game
+Gra Saper napisana w C#
 
