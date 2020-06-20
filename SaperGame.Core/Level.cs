@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace SniperGame.Core
+namespace SaperGame.Core
 {
     public enum Level
     {

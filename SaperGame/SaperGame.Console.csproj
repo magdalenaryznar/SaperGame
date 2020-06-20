@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{4788A879-F906-47F5-BC04-1C8016DB6D8C}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>SniperGame</RootNamespace>
-    <AssemblyName>SniperGame</AssemblyName>
+    <RootNamespace>SaperGame</RootNamespace>
+    <AssemblyName>SaperGame</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>

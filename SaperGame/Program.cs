@@ -1,5 +1,4 @@
 ﻿using SaperGame.Core;
-using SniperGame.Core;
 using System;
 
 namespace SaperGame

@@ -1,4 +1,4 @@
-﻿using SniperGame.Core;
+﻿using SaperGame.Core;
 using System;
 using System.Security.Cryptography.X509Certificates;
 
