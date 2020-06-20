@@ -3,11 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaperGame.Console", "SniperGame\SaperGame.Console.csproj", "{4788A879-F906-47F5-BC04-1C8016DB6D8C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaperGame.Console", "SaperGame\SaperGame.Console.csproj", "{4788A879-F906-47F5-BC04-1C8016DB6D8C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaperGame.Lib", "SniperGame.Core\SaperGame.Lib.csproj", "{C26E2F41-F5E7-4D90-8ED3-D947F8EB99E2}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SniperGame.WinForms", "SniperGame.WinForms\SniperGame.WinForms.csproj", "{F157DEA1-8EDC-4710-B08C-E13D32D06F8E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaperGame.Lib", "SaperGame.Core\SaperGame.Lib.csproj", "{C26E2F41-F5E7-4D90-8ED3-D947F8EB99E2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +21,6 @@ Global
 		{C26E2F41-F5E7-4D90-8ED3-D947F8EB99E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C26E2F41-F5E7-4D90-8ED3-D947F8EB99E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C26E2F41-F5E7-4D90-8ED3-D947F8EB99E2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F157DEA1-8EDC-4710-B08C-E13D32D06F8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F157DEA1-8EDC-4710-B08C-E13D32D06F8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F157DEA1-8EDC-4710-B08C-E13D32D06F8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F157DEA1-8EDC-4710-B08C-E13D32D06F8E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

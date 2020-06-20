@@ -18,17 +18,28 @@ namespace SaperGame
 
             game = new Game(gameLevel);
 
-            while (game.GameInProgress())
+            try
             {
-                Console.WriteLine("Poziom: " + gameLevel.ToString());
-                Console.WriteLine();
+                while (game.GameInProgress())
+                {
+                    Console.WriteLine("Poziom: " + gameLevel.ToString());
+                    Console.WriteLine();
 
+                    PrintGame();
+
+                    Console.WriteLine("Podaj wspolrzedne w formie x y");
+                    string field = Console.ReadLine();
+                    game.SetField(field);
+
+                    Console.Clear();
+                }
+            }
+            catch(Exception exception)
+            {
                 PrintGame();
 
-                Console.WriteLine("Podaj wspolrzedne w formie x y");
-                string field = Console.ReadLine();
-
-                Console.Clear();
+                Console.WriteLine(exception.Message);
+                Console.ReadLine();
             }
 
             var result = game.Result();
@@ -49,10 +60,19 @@ namespace SaperGame
                     {
                         Console.Write(game.Fields[i, j].Value);
                     }
+                    else if(game.Fields[i, j].Visible && game.Fields[i, j].Value == 0)
+                    {
+                        Console.Write(" ");
+                    }
+                    else if (game.Fields[i, j].Visible && game.Fields[i, j].Value == 9)
+                    {
+                        Console.Write("#");
+                    }
                     else
                     {
                         Console.Write("x");
                     }
+                    
                 }
 
                 Console.WriteLine();
