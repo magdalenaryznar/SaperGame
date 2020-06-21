@@ -1,5 +1,6 @@
 ﻿using SaperGame.Core;
 using System;
+using System.Collections.Generic;
 
 namespace SaperGame
 {
@@ -17,6 +18,8 @@ namespace SaperGame
 
             game = new Game(gameLevel);
 
+            List<string> moves = new List<string>();
+
             try
             {
                 while (game.GameInProgress())
@@ -27,21 +30,61 @@ namespace SaperGame
                     PrintGame();
 
                     Console.WriteLine("Podaj wspolrzedne w formie x y");
+                    InformAboutFields(game.Level);
                     string field = Console.ReadLine();
-                    game.SetField(field);
+                    moves.Add(field);
 
+                    bool fieldResult = game.SetField(field);
+                    if (!fieldResult)
+                    {
+                        Console.WriteLine("Try different field!");
+                    }
                     Console.Clear();
                 }
             }
-            catch(Exception exception)
+            catch (Exception exception)
             {
                 PrintGame();
+                Console.ForegroundColor = ConsoleColor.Red;
 
                 Console.WriteLine(exception.Message);
-                Console.ReadLine();
+
+                Console.ForegroundColor = ConsoleColor.White;
             }
 
-            var result = game.Result();
+            var result = game.GetResult();
+            if (result.Win)
+            {
+                Console.WriteLine("YOU WON!");
+            }
+
+            Console.WriteLine("Game results: ");
+            Console.WriteLine("Score: " + result.Score);
+            Console.WriteLine("Time in minutes: " + Math.Round(result.Time, 2));
+
+            Console.WriteLine("Your moves:");
+            foreach (string move in moves)
+            {
+                Console.WriteLine(move);
+            }
+
+            Console.ReadLine();
+        }
+
+        private static void InformAboutFields(Level level)
+        {
+            switch (level)
+            {
+                case Level.Easy:
+                    Console.WriteLine("Put values between 0 to 5");
+                    break;
+                case Level.Medium:
+                    Console.WriteLine("Put values between 0 to 8");
+                    break;
+                case Level.Hard:
+                    Console.WriteLine("Put values between 0 to 11");
+                    break;
+            }
         }
 
         private static void PrintGame()
@@ -55,11 +98,11 @@ namespace SaperGame
             {
                 for (int j = 0; j < size; j++)
                 {
-                    if(game.Fields[i,j].Visible)
+                    if (game.Fields[i, j].Visible)
                     {
                         Console.Write(game.Fields[i, j].Value);
                     }
-                    else if(game.Fields[i, j].Visible && game.Fields[i, j].Value == 0)
+                    else if (game.Fields[i, j].Visible && game.Fields[i, j].Value == 0)
                     {
                         Console.Write(" ");
                     }
@@ -71,7 +114,7 @@ namespace SaperGame
                     {
                         Console.Write("x");
                     }
-                    
+
                 }
 
                 Console.WriteLine();

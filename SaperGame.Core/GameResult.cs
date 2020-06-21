@@ -11,9 +11,9 @@ namespace SaperGame.Core
 
         public bool Win { get; }
 
-        public int Time { get;  }
+        public double Time { get;  }
 
-        public GameResult(int score, int time, bool win)
+        public GameResult(int score, double time, bool win)
         {
             Score = score;
             Win = win;

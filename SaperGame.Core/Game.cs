@@ -1,21 +1,28 @@
-﻿using SaperGame.Core;
-using System;
-using System.Security.Cryptography.X509Certificates;
+﻿using System;
 
 namespace SaperGame.Core
 {
     public class Game
     {
         public SaperField[,] Fields { get; private set; }
+        public Level Level { get; set; }
 
         private const int Mine = 9;
 
-        private int score;
+        private int score = 0;
+
+        private DateTime start;
 
         private bool gameInProgress;
 
+        private bool hasWin = false;
+
         public Game(Level level)
         {
+            start = DateTime.Now;
+
+            Level = level;
+
             switch (level)
             {
                 case Level.Easy:
@@ -46,31 +53,47 @@ namespace SaperGame.Core
             SetMines(size, mines);
         }
 
-        public void SetField(string fieldValue)
-        {
-            var values = fieldValue.Split(' ');
-            var x = int.Parse(values[0]);
-            var y = int.Parse(values[1]);
 
-            SetField(x, y);
-            SetField(x - 1, y - 1);
-            SetField(x - 1, y);
-            SetField(x - 1, y + 1);
-            SetField(x + 1, y - 1);
-            SetField(x + 1, y);
-            SetField(x + 1, y + 1);
-            SetField(x, y - 1);
-            SetField(x, y);
-            SetField(x, y + 1);
+        public GameResult GetResult()
+        {
+            return new GameResult(score, (DateTime.Now - start).TotalMinutes, hasWin);
         }
 
-        public void SetField(int x, int y)
+        public bool SetField(string fieldValue)
         {
-            if (x < 0 || x > Size()) return; // poza tablicą wyjście
-            if (y < 0 || y > Size()) return; // poza tablicą wyjście
-           
+            try
+            {
+                var values = fieldValue.Split(' ');
+                var x = int.Parse(values[0]);
+                var y = int.Parse(values[1]);
+
+                SetField(x, y);
+                SetField(x - 1, y - 1);
+                SetField(x - 1, y);
+                SetField(x - 1, y + 1);
+                SetField(x + 1, y - 1);
+                SetField(x + 1, y);
+                SetField(x + 1, y + 1);
+                SetField(x, y - 1);
+                SetField(x, y);
+                SetField(x, y + 1);
+
+                return true;
+            }
+            catch (IndexOutOfRangeException)
+            {
+                return false;
+            }
+        }
+
+        public int? SetField(int x, int y)
+        {
+
+            if (x < 0 || x > Size()) return null;
+            if (y < 0 || y > Size()) return null;
+
             var field = Fields[x, y];
-            if (field.Visible) return;
+            if (field.Visible) return null;
 
             field.Visible = true;
 
@@ -79,6 +102,11 @@ namespace SaperGame.Core
                 field.Value = Mine;
                 throw new Exception("Mine found! You lost :(");
             }
+
+            score += field.Value;
+
+            return field.Value;
+
         }
 
         private void SetMines(int size, int mines)
@@ -107,20 +135,16 @@ namespace SaperGame.Core
                 for (int k = -1; k < 2; k++)
                     for (int l = -1; l < 2; l++)
                     {
-                        if ((x + l) < 0 || (y + k) < 0) continue; //wyjdz bo krawedz
-                        if ((x + l) > 9 || (y + k) > 9) continue; //wyjdz bo krawedz
+                        if ((x + l) < 0 || (y + k) < 0) continue;
 
-                        if (Fields[x + l, y + k].Value == Mine) continue; //wyjdz bo mina
-                        Fields[x + l, y + k].Value += 1; //zwieksz o 1
+                        if ((x + l) > 9 || (y + k) > 9) continue;
+
+                        if (Fields[x + l, y + k].Value == Mine) continue;
+                        Fields[x + l, y + k].Value += 1;
                     }
             }
 
             return true;
-        }
-
-        public GameResult Result()
-        {
-            return new GameResult(0, 0, false);
         }
 
         public bool GameInProgress()
